@@ -22,27 +22,52 @@ class Queue {
 
   enqueue(val) {
     let newNode = new Node(val);
-    if (first === null || last === null) {
+    if (this.first === null || this.last === null) {
       this.first = newNode;
       this.last = newNode;
-      this.length++;
+      this.size++;
     } else {
       this.last.next = newNode;
+      this.last = newNode;
+      this.size++;
     }
   }
 
   /** dequeue(): remove the node from the start of the queue
    * and return its value. Should throw an error if the queue is empty. */
 
-  dequeue() {}
+  dequeue() {
+    if (this.first === null) throw new Error("Queue is empty.");
+    else {
+      const val = this.first.val;
+      this.first = this.first.next;
+      this.size--;
+      return val;
+    }
+  }
 
   /** peek(): return the value of the first node in the queue. */
 
-  peek() {}
+  peek() {
+    if (this.head === null) return;
+    return this.first.val;
+  }
 
   /** isEmpty(): return true if the queue is empty, otherwise false */
 
-  isEmpty() {}
+  isEmpty() {
+    return this.size === 0;
+  }
+
+  /** print(): prints out the values of the queue */
+  print() {
+    if (this.head === null) console.log("Queue is empty");
+    let current = this.first;
+    while (current) {
+      console.log(current.val);
+      current = current.next;
+    }
+  }
 }
 
 module.exports = Queue;
